@@ -1,7 +1,7 @@
-import { HttpClient, HttpMethod } from './../../types/common/HttpClient';
+import { IHttpClient, HttpMethod } from './../../types/common/HttpClient';
 import { from, Observable } from 'rxjs';
 
-export class CustomHttpClient<T> implements HttpClient {
+export class CustomHttpClient<T> implements IHttpClient {
 	private baseURL: string;
 
 	constructor(baseURL?: string) {

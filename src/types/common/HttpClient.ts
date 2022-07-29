@@ -8,7 +8,7 @@ export enum HttpMethod {
 	'DELETE',
 }
 
-export interface HttpClient {
+export interface IHttpClient {
 	get(endpoint: string, body?: any): Observable<any>;
 	post(endpoint: string, body?: any): Observable<any>;
 	put(endpoint: string, body?: any): Observable<any>;
