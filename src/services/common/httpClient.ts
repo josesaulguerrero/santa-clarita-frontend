@@ -1,4 +1,4 @@
-import { IHttpClient, HttpMethod } from './../../types/common/HttpClient';
+import { IHttpClient, HttpMethod } from '../../types/common/Http';
 import { from, Observable } from 'rxjs';
 
 export class CustomHttpClient implements IHttpClient {
