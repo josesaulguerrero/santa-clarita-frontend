@@ -1,3 +1,4 @@
+import { PartialAppointmentDTO } from './AppointmentDTO';
 export interface PartialPatientDTO {
 	readonly id: number;
 	readonly dni: string;
@@ -6,7 +7,7 @@ export interface PartialPatientDTO {
 }
 
 export interface DetailedPatientDTO extends PartialPatientDTO {
-	// readonly takenAppointments: PartialAppointmentDTO[]; // TODO create appointment dto
+	readonly takenAppointments: PartialAppointmentDTO[];
 }
 
 export interface CreatePatientDTO {
