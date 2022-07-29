@@ -1,3 +1,4 @@
-import { AppointmentService } from './services/appointment/index';
+import { Header } from './components/Header';
 
-AppointmentService.getInstance().getAll().subscribe(console.log);
+const rootNode = document.querySelector('#root')!;
+rootNode.innerHTML = Header();
