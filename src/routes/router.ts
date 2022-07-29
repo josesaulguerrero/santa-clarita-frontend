@@ -1,17 +1,37 @@
 import { IRoute } from './../types/common/Router';
 import { Routes } from '../types/common/Router';
 import { BehaviorSubject } from 'rxjs';
+import { Component } from '../types/common/Component';
 
 export class Router {
-	private routes: Routes;
 	private static instance: Router;
-	public routeHash$: BehaviorSubject<string>;
+	private routes: Routes;
+	private currentRoute: string;
+	private $rootNode: HTMLElement;
+	private route$: BehaviorSubject<string>;
 
 	private constructor() {
 		this.routes = [];
-		this.routeHash$ = new BehaviorSubject<string>('#');
-		this.routeHash$.subscribe((hash) => {
-			location.hash = hash;
+		this.route$ = new BehaviorSubject<string>(location.hash);
+		this.currentRoute = location.hash;
+		this.$rootNode = document.querySelector('#root')!;
+		this.updateUI();
+	}
+
+	private getComponent(route: string): Component<void> {
+		const componentIndex = this.routes.findIndex((r) => r.route === route);
+		return componentIndex < 0
+			? () => document.createElement('section')
+			: this.routes[componentIndex].component;
+	}
+
+	private updateUI() {
+		this.route$.subscribe((route) => {
+			location.hash = route;
+			this.currentRoute = route;
+			const renderComponent = this.getComponent(route);
+			this.$rootNode.innerHTML = '';
+			this.$rootNode.appendChild(renderComponent());
 		});
 	}
 
@@ -19,12 +39,14 @@ export class Router {
 		this.routes.push(route);
 	}
 
-	public getHash() {
-		return this.routeHash$.asObservable;
+	public getRoute() {
+		return this.route$.asObservable();
 	}
 
-	public updateHash(newHash: string): void {
-		this.routeHash$.next(newHash);
+	public updateHash(newRoute: string): void {
+		if (newRoute !== this.currentRoute) {
+			this.route$.next(newRoute);
+		}
 	}
 
 	public static getInstance = (): Router => {
