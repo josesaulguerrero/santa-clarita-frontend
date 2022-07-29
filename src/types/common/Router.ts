@@ -1,6 +1,7 @@
+import { Component } from './Component';
 export interface IRoute {
 	route: string;
-	component: unknown; //TODO replace unknown by component type
+	component: Component<any>;
 }
 
 export type Routes = IRoute[];
