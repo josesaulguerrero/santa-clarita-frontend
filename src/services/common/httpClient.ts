@@ -1,15 +1,9 @@
+import { HttpClient, HttpMethod } from './../../types/common/HttpClient';
 import { from, Observable } from 'rxjs';
 
 const baseURL = import.meta.env.VITE_API_BASE_URL;
-export enum HttpMethod {
-	'GET',
-	'POST',
-	'PUT',
-	'PATCH',
-	'DELETE',
-}
 
-export const httpClient = <T>(
+export const httpClient: HttpClient = <T>(
 	endpoint: string,
 	method: HttpMethod,
 	body?: any
