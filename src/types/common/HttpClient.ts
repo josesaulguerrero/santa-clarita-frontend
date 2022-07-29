@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+
 export enum HttpMethod {
 	'GET',
 	'POST',
@@ -6,8 +8,10 @@ export enum HttpMethod {
 	'DELETE',
 }
 
-export type HttpClient = (
-	endpoint: string,
-	method: HttpMethod,
-	body?: any
-) => {};
+export interface HttpClient {
+	get(endpoint: string, body?: any): Observable<any>;
+	post(endpoint: string, body?: any): Observable<any>;
+	put(endpoint: string, body?: any): Observable<any>;
+	patch(endpoint: string, body?: any): Observable<any>;
+	delete(endpoint: string, body?: any): Observable<any>;
+}
