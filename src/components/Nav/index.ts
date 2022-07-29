@@ -1,18 +1,19 @@
 import { Component } from '../../types/common/Component';
+import { Navlink } from '../Navlink';
 import './index.css';
 
-interface IProps {
+interface INavProps {
 	items: string[];
 }
 
 const renderItems = (items: string[]) =>
-	items.map((item) => `<li>${item}</li>`).join('');
+	items.map((item) => Navlink({ content: item, href: item })).join('');
 
-export const Nav: Component<IProps> = (props): string =>
+export const Nav: Component<INavProps> = ({ items }): string =>
 	`
       <nav class="nav-bar">
          <ul class="nav-links">
-            ${renderItems(props.items)}
+            ${renderItems(items)}
          </ul>
       </nav>
    `;
