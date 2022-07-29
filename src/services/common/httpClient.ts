@@ -1,7 +1,7 @@
 import { IHttpClient, HttpMethod } from './../../types/common/HttpClient';
 import { from, Observable } from 'rxjs';
 
-export class CustomHttpClient<T> implements IHttpClient {
+export class CustomHttpClient implements IHttpClient {
 	private baseURL: string;
 
 	constructor(baseURL?: string) {
@@ -11,12 +11,13 @@ export class CustomHttpClient<T> implements IHttpClient {
 		}
 	}
 
-	private execute(
+	private execute<ResponseType>(
 		endpoint: string,
 		method: HttpMethod,
 		body?: any
-	): Observable<T> {
-		const requestConfig: Request = new Request(endpoint, {
+	): Observable<ResponseType> {
+		const url = `${this.baseURL}/${endpoint}`;
+		const requestConfig: Request = new Request(url, {
 			method: HttpMethod[method],
 			body: body,
 		});
@@ -24,18 +25,31 @@ export class CustomHttpClient<T> implements IHttpClient {
 		return from(response);
 	}
 
-	get = (endpoint: string, body?: any): Observable<T> =>
-		this.execute(endpoint, HttpMethod.GET, body);
+	get<ResponseType>(endpoint: string, body?: any): Observable<ResponseType> {
+		return this.execute<ResponseType>(endpoint, HttpMethod.GET, body);
+	}
 
-	post = (endpoint: string, body?: any): Observable<T> =>
-		this.execute(endpoint, HttpMethod.POST, body);
+	post = <ResponseType>(
+		endpoint: string,
+		body?: any
+	): Observable<ResponseType> =>
+		this.execute<ResponseType>(endpoint, HttpMethod.GET, body);
 
-	put = (endpoint: string, body?: any): Observable<T> =>
-		this.execute(endpoint, HttpMethod.PUT, body);
+	put = <ResponseType>(
+		endpoint: string,
+		body?: any
+	): Observable<ResponseType> =>
+		this.execute<ResponseType>(endpoint, HttpMethod.GET, body);
 
-	patch = (endpoint: string, body?: any): Observable<T> =>
-		this.execute(endpoint, HttpMethod.PATCH, body);
+	patch = <ResponseType>(
+		endpoint: string,
+		body?: any
+	): Observable<ResponseType> =>
+		this.execute<ResponseType>(endpoint, HttpMethod.GET, body);
 
-	delete = (endpoint: string, body?: any): Observable<T> =>
-		this.execute(endpoint, HttpMethod.DELETE, body);
+	delete = <ResponseType>(
+		endpoint: string,
+		body?: any
+	): Observable<ResponseType> =>
+		this.execute<ResponseType>(endpoint, HttpMethod.GET, body);
 }

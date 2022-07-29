@@ -9,9 +9,9 @@ export enum HttpMethod {
 }
 
 export interface IHttpClient {
-	get(endpoint: string, body?: any): Observable<any>;
-	post(endpoint: string, body?: any): Observable<any>;
-	put(endpoint: string, body?: any): Observable<any>;
-	patch(endpoint: string, body?: any): Observable<any>;
-	delete(endpoint: string, body?: any): Observable<any>;
+	get<ResponseType>(endpoint: string, body?: any): Observable<ResponseType>;
+	post<ResponseType>(endpoint: string, body?: any): Observable<ResponseType>;
+	put<ResponseType>(endpoint: string, body?: any): Observable<ResponseType>;
+	patch<ResponseType>(endpoint: string, body?: any): Observable<ResponseType>;
+	delete<ResponseType>(endpoint: string, body?: any): Observable<ResponseType>;
 }
