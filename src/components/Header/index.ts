@@ -5,13 +5,13 @@ import { Nav } from '../Nav';
 
 export const Header: Component<void> = (): HTMLElement => {
 	const $header = document.createElement('header');
-	$header.classList.add('header');
 	const template = `
       <section class="logo">
          <img src=${logo} width="80px" alt="Hospital's branding logo">
       </section>
-   `;
+      `;
 	$header.innerHTML = template;
+	$header.classList.add('header');
 	const $nav = Nav({
 		items: ['Specialties', 'Specialists', 'Patients', 'Appointments'],
 	});

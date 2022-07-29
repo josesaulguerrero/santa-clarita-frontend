@@ -11,10 +11,8 @@ const mapItems = (items: string[]): HTMLElement[] =>
 
 export const Nav: Component<INavProps> = ({ items }): HTMLElement => {
 	const $nav = document.createElement('nav');
-	const template = `<ul class="nav-links"></ul>`;
-	$nav.innerHTML = template;
-	const mappedItems = mapItems(items);
+	$nav.innerHTML = `<ul class="nav-links"></ul>`;
 	$nav.classList.add('nav-bar');
-	$nav.querySelector('.nav-links')!.append(...mappedItems);
+	$nav.querySelector('.nav-links')!.append(...mapItems(items));
 	return $nav;
 };

@@ -7,7 +7,8 @@ interface INavlinkProps {
 
 const onClick = (event: MouseEvent) => {
 	event.preventDefault();
-	console.log(event);
+	const redirectTo = (event.target as HTMLAnchorElement).dataset.href!;
+	// location.pathname = redirectTo;
 };
 
 export const Navlink: Component<INavlinkProps> = ({
@@ -16,6 +17,7 @@ export const Navlink: Component<INavlinkProps> = ({
 }): HTMLAnchorElement => {
 	const $navlink = document.createElement('a');
 	$navlink.href = href.toLowerCase();
+	$navlink.dataset.href = href.toLowerCase();
 	$navlink.id = `navlink-${href}`;
 	$navlink.onclick = onClick;
 	$navlink.innerHTML = content;
