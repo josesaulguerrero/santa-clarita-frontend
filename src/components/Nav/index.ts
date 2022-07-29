@@ -6,14 +6,15 @@ interface INavProps {
 	items: string[];
 }
 
-const renderItems = (items: string[]) =>
-	items.map((item) => Navlink({ content: item, href: item })).join('');
+const mapItems = (items: string[]): HTMLElement[] =>
+	items.map((item) => Navlink({ content: item, href: item }));
 
-export const Nav: Component<INavProps> = ({ items }): string =>
-	`
-      <nav class="nav-bar">
-         <ul class="nav-links">
-            ${renderItems(items)}
-         </ul>
-      </nav>
-   `;
+export const Nav: Component<INavProps> = ({ items }): HTMLElement => {
+	const $nav = document.createElement('nav');
+	const template = `<ul class="nav-links"></ul>`;
+	$nav.innerHTML = template;
+	const mappedItems = mapItems(items);
+	$nav.classList.add('nav-bar');
+	$nav.querySelector('.nav-links')!.append(...mappedItems);
+	return $nav;
+};
