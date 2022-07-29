@@ -1,19 +1,19 @@
-import { PartialSpecialistDTO } from './SpecialistDTO';
+import { IPartialSpecialistDTO } from './SpecialistDTO';
 
-export interface PartialSpecialtyDTO {
+export interface IPartialSpecialtyDTO {
 	readonly id: number;
 	readonly name: string;
 }
 
-export interface DetailedSpecialtyDTO extends PartialSpecialtyDTO {
-	readonly specialistInCharge: PartialSpecialistDTO;
+export interface IDetailedSpecialtyDTO extends IPartialSpecialtyDTO {
+	readonly specialistInCharge: IPartialSpecialistDTO;
 }
 
-export interface CreateSpecialtyDTO {
+export interface ICreateSpecialtyDTO {
 	readonly name: string;
 	readonly specialistId: number;
 }
 
-export interface UpdateSpecialtyDTO extends CreateSpecialtyDTO {
+export interface IUpdateSpecialtyDTO extends ICreateSpecialtyDTO {
 	readonly id: number;
 }

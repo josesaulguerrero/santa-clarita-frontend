@@ -1,15 +1,15 @@
-import { PartialSpecialtyDTO } from './SpecialtyDTO';
+import { IPartialSpecialtyDTO } from './SpecialtyDTO';
 
-export interface PartialAppointmentDTO {
+export interface IPartialAppointmentDTO {
 	readonly id: number;
 	readonly date: string;
 }
 
-export interface DetailedAppointmentDTO extends PartialAppointmentDTO {
-	readonly specialty: PartialSpecialtyDTO;
+export interface IDetailedAppointmentDTO extends IPartialAppointmentDTO {
+	readonly specialty: IPartialSpecialtyDTO;
 }
 
-export interface CreateAppointmentDTO {
+export interface ICreateAppointmentDTO {
 	readonly patientId: number;
 	readonly specialtyId: number;
 }
