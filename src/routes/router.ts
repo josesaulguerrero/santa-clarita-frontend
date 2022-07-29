@@ -1,20 +1,36 @@
+import { IRoute } from './../types/common/Router';
 import { Routes } from '../types/common/Router';
+import { BehaviorSubject } from 'rxjs';
 
-const routes: Routes = [
-	{
-		route: 'specialists',
-		component: () => 'hello world',
-	},
-];
+export class Router {
+	private routes: Routes;
+	private static instance: Router;
+	public routeHash$: BehaviorSubject<string>;
 
-export const resolveRoute = () => {
-	console.log(location.pathname);
-};
+	private constructor() {
+		this.routes = [];
+		this.routeHash$ = new BehaviorSubject<string>('#');
+		this.routeHash$.subscribe((hash) => {
+			location.hash = hash;
+		});
+	}
 
-export const Router = () => {
-	// const path = 'specialists';
-	// const componentIndex = routes.findIndex((route) => route.route === path);
-	// const component =
-	// 	componentIndex < 0 ? () => 'Not found' : routes[componentIndex].component;
-	// document.querySelector('#root')!.innerHTML = component(null);
-};
+	public addRoute(route: IRoute) {
+		this.routes.push(route);
+	}
+
+	public getHash() {
+		return this.routeHash$.asObservable;
+	}
+
+	public updateHash(newHash: string): void {
+		this.routeHash$.next(newHash);
+	}
+
+	public static getInstance = (): Router => {
+		if (!Router.instance) {
+			Router.instance = new Router();
+		}
+		return Router.instance;
+	};
+}
