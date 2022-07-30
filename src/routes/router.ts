@@ -22,9 +22,10 @@ export class Router {
 	}
 
 	private getComponent(route: string): Component<void> {
-		const componentIndex = this.routes.findIndex((r) => {
-			return r.route === route;
-		});
+		const routePattern = this.mapRouteToPattern(route);
+		const componentIndex = this.routes.findIndex((r) =>
+			routePattern.test(r.route)
+		);
 		return componentIndex < 0
 			? () => document.createElement('section')
 			: this.routes[componentIndex].component;
@@ -35,24 +36,27 @@ export class Router {
 			if (location.pathname === '/') {
 				this.updateRoute(this.initialRoute);
 			}
-			this.route$.next(this.normalizeRoute(location.pathname));
+			this.route$.next(location.pathname);
 		});
 		window.addEventListener(
 			'popstate',
-			() => {
-				console.log('hid');
-				this.route$.next(this.normalizeRoute(location.pathname));
-			},
+			() => this.route$.next(location.pathname),
 			true
 		);
 		this.route$.subscribe((route) => {
 			this.currentRoute = route;
 			this.updateUI();
 		});
+		const s: string = '/hello/';
+		s.replaceAll(/\//gm, '\\/').replaceAll(/(\:|\*)\w*/gm, '\\w*');
 	}
 
-	private normalizeRoute(route: string): string {
-		return route.replaceAll(/^\//gm, '');
+	private mapRouteToPattern(route: string): RegExp {
+		const pattern = route
+			.replaceAll(/^\//gm, '')
+			.replaceAll(/\//gm, '\\/')
+			.replaceAll(/(\:|\*)\w*/gm, 'w*');
+		return new RegExp(pattern, 'gm');
 	}
 
 	private updateUI() {
@@ -84,7 +88,7 @@ export class Router {
 				'santa clarita',
 				newRoute
 			);
-			this.route$.next(this.normalizeRoute(newRoute));
+			this.route$.next(location.pathname);
 		}
 	}
 
