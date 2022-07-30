@@ -1,0 +1,87 @@
+.create-specialist {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 20px;
+}
+
+.create-specialist-form {
+	width: 100%;
+	height: fit-content;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 20px;
+}
+
+.form-title {
+	text-align: center;
+	font-size: 2.5rem;
+	margin: 0 0 50px;
+}
+
+.form-label {
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 10px;
+}
+
+.label-message {
+	font-size: 1.4rem;
+}
+
+.label-input {
+	width: 100%;
+	height: 40px;
+	font-size: 1.6rem;
+	border: none;
+	border-radius: 5px;
+	padding: 10px;
+}
+
+.label-input:focus {
+	outline: 2px solid blueviolet;
+}
+
+.form-message {
+	font-size: 1.5rem;
+	font-weight: bold;
+	align-self: center;
+	text-align: center;
+}
+
+.form-message.error {
+	color: rgb(226, 65, 65);
+}
+
+.form-message.success {
+	color: rgb(32, 159, 38);
+}
+
+.form-submit {
+	width: 100%;
+	max-width: 200px;
+	align-self: center;
+	margin-top: 20px;
+	padding: 15px 10px;
+	border-radius: 10px;
+	background-color: rgb(243, 212, 100);
+	outline: none;
+	border: none;
+	transition: transform 0.2s;
+}
+
+@media (hover: hover) {
+	.form-submit:hover {
+		cursor: pointer;
+		transform: scale(1.1);
+	}
+}

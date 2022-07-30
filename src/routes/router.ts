@@ -1,5 +1,5 @@
-import { Routes } from '../types/common/Router';
 import { BehaviorSubject } from 'rxjs';
+import { Routes } from '../types/common/Router';
 import { Component } from '../types/common/Component';
 
 export class Router {
@@ -44,11 +44,11 @@ export class Router {
 			true
 		);
 		this.route$.subscribe((route) => {
-			this.currentRoute = route;
-			this.updateUI();
+			if (route !== '/') {
+				this.currentRoute = route;
+				this.updateUI();
+			}
 		});
-		const s: string = '/hello/';
-		s.replaceAll(/\//gm, '\\/').replaceAll(/(\:|\*)\w*/gm, '\\w*');
 	}
 
 	private mapRouteToPattern(route: string): RegExp {
