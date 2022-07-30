@@ -9,6 +9,7 @@ export class Router {
 	private initialRoute: string;
 	private $rootNode: HTMLElement;
 	private route$: BehaviorSubject<string>;
+	private hasBeenInitialized: boolean;
 
 	private constructor() {
 		const initialRoute = '/';
@@ -17,6 +18,7 @@ export class Router {
 		this.currentRoute = initialRoute;
 		this.initialRoute = initialRoute;
 		this.$rootNode = document.querySelector('#root')!;
+		this.hasBeenInitialized = false;
 	}
 
 	private getComponent(route: string): Component<void> {
@@ -28,18 +30,30 @@ export class Router {
 			: this.routes[componentIndex].component;
 	}
 
-	private updateUI() {
-		this.route$.subscribe((route) => {
-			if (this.initialRoute === '/' || route !== '/') {
-				location.hash = route;
-				this.currentRoute = route;
-				const renderComponent = this.getComponent(route);
-				this.$rootNode.innerHTML = '';
-				this.$rootNode.appendChild(renderComponent());
-			} else {
-				this.route$.next(this.initialRoute);
+	private setUpListeners() {
+		window.addEventListener('load', () => {
+			if (location.hash === '') {
+				location.hash = `/${this.initialRoute}`;
 			}
+			this.route$.next(this.normalizeRoute(location.hash));
 		});
+		window.addEventListener('hashchange', () =>
+			this.route$.next(this.normalizeRoute(location.hash))
+		);
+		this.route$.subscribe((route) => {
+			this.currentRoute = route;
+			this.updateUI(route);
+		});
+	}
+
+	private normalizeRoute(route: string): string {
+		return route.replaceAll(/#\//gm, '');
+	}
+
+	private updateUI(route: string) {
+		const renderComponent = this.getComponent(this.currentRoute);
+		this.$rootNode.innerHTML = '';
+		this.$rootNode.appendChild(renderComponent());
 	}
 
 	public setUpInitialRoute(redirectTo: string) {
@@ -47,15 +61,18 @@ export class Router {
 	}
 
 	public setUpRoutes(routes: Routes) {
-		this.routes = routes;
-		this.updateUI();
+		if (!this.hasBeenInitialized) {
+			this.routes = routes;
+			this.setUpListeners();
+			this.hasBeenInitialized = true;
+		}
 	}
 
 	public getRoute() {
 		return this.route$.asObservable();
 	}
 
-	public updateHash(newRoute: string): void {
+	public updateRoute(newRoute: string): void {
 		if (newRoute !== this.currentRoute) {
 			this.route$.next(newRoute);
 		}

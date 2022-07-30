@@ -1,4 +1,3 @@
-import { Router } from '../../routes/router';
 import { Component } from '../../types/common/Component';
 import './index.css';
 
@@ -10,7 +9,7 @@ interface INavlinkProps {
 const onClick = (event: MouseEvent) => {
 	event.preventDefault();
 	const redirectTo = (event.target as HTMLAnchorElement).dataset.href!;
-	Router.getInstance().updateHash(redirectTo);
+	location.hash = `/${redirectTo}`;
 };
 
 export const Navlink: Component<INavlinkProps> = ({

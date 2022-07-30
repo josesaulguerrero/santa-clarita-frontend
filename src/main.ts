@@ -1,3 +1,4 @@
+import { CreateSpecialist } from './components/CreateSpecialist/index';
 import { Router } from './routes/router';
 import './main.css';
 import { Home } from './pages/Home';
@@ -13,6 +14,10 @@ const routes: Routes = [
 	{
 		route: 'specialists',
 		component: () => Layout({ child: Specialists }),
+	},
+	{
+		route: 'specialists/create',
+		component: () => Layout({ child: CreateSpecialist }),
 	},
 ];
 

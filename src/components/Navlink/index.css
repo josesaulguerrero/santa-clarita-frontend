@@ -1,7 +1,6 @@
 a[id^='navlink-'] {
 	text-decoration: none;
 	min-width: 160px;
-	max-width: fit-content;
 	height: 40px;
 	display: flex;
 	align-items: center;
