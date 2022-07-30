@@ -9,6 +9,7 @@ import { Patients } from './pages/Patients';
 import { CreatePatient } from './components/CreatePatient';
 import { Specialties } from './pages/Specialties';
 import { CreateSpecialty } from './components/CreateSpecialty';
+import { CreateAppointment } from './components/CreateAppointment';
 
 const routes: Routes = [
 	{
@@ -38,6 +39,10 @@ const routes: Routes = [
 	{
 		route: 'specialties/create',
 		component: () => Layout({ child: CreateSpecialty }),
+	},
+	{
+		route: 'appointments/create',
+		component: () => Layout({ child: CreateAppointment }),
 	},
 ];
 

@@ -1,4 +1,3 @@
-import { PatientService } from '../../services/patient/index';
 import { SpecialistService } from '../../services/specialist';
 import { SpecialtyService } from '../../services/specialty';
 import { Component } from '../../types/common/Component';
@@ -24,7 +23,6 @@ const onSubmit = (event: SubmitEvent) => {
 		'#specialist'
 	) as HTMLInputElement;
 	const $formMessage = $form.querySelector('#form-message')!;
-	removeOption($specialistInput);
 	$formMessage.innerHTML = '';
 	if (!stringIsEmpty($nameInput.value)) {
 		try {
@@ -32,6 +30,7 @@ const onSubmit = (event: SubmitEvent) => {
 				name: $nameInput.value,
 				specialistId: Number($specialistInput.value),
 			});
+			removeOption($specialistInput);
 			$formMessage.innerHTML = 'Your request has been processed successfully.';
 			$formMessage.classList.add('success');
 		} catch (error) {
@@ -43,11 +42,11 @@ const onSubmit = (event: SubmitEvent) => {
 };
 
 export const CreateSpecialty: Component<void> = () => {
-	const $createPatientForm = document.createElement('section');
-	$createPatientForm.classList.add('create-patient');
-	$createPatientForm.innerHTML = `
+	const $createSpecialtyForm = document.createElement('section');
+	$createSpecialtyForm.classList.add('create-specialty');
+	$createSpecialtyForm.innerHTML = `
 		<h1 class="form-title" >Please enter the required information.</h1>
-		<form class="create-patient-form" id="create-patient-form">
+		<form class="create-specialty-form" id="create-specialty-form">
 			<label for="name" class="form-label">
 				<span class="label-message" >Enter the new specialty name: </span>
 				<input type="text" maxlength="50" id="name" name="name" required class="label-input">
@@ -57,15 +56,15 @@ export const CreateSpecialty: Component<void> = () => {
 				<select name="specialist" id="specialist" disabled="true" required class="label-input"></select>
 				<span class="loader" id="loader" >Loading... Please wait</span>
 			</label>
-			<span class="form-message success" id="form-message" ></span>
+			<span class="form-message" id="form-message" ></span>
 			<button class="form-submit" type="submit">Submit</button>
 		</form>
    `;
-	const $specialistInput = $createPatientForm.querySelector(
+	const $specialistInput = $createSpecialtyForm.querySelector(
 		'#specialist'
 	) as HTMLInputElement;
-	const $form = $createPatientForm.querySelector('#create-patient-form')!;
-	const $loader = $createPatientForm.querySelector('#loader');
+	const $form = $createSpecialtyForm.querySelector('#create-specialty-form')!;
+	const $loader = $createSpecialtyForm.querySelector('#loader');
 	const $formMessage = $form.querySelector('#form-message')!;
 	$formMessage.innerHTML = '';
 	try {
@@ -89,5 +88,5 @@ export const CreateSpecialty: Component<void> = () => {
 		$formMessage.classList.add('error');
 	}
 	($form as HTMLFormElement).onsubmit = onSubmit;
-	return $createPatientForm;
+	return $createSpecialtyForm;
 };
