@@ -1,0 +1,14 @@
+.specialist {
+	width: 100%;
+	height: auto;
+	list-style: none;
+	margin-bottom: 10px;
+}
+
+.specialist-name {
+	font-size: 1.6rem;
+}
+
+.specialist-id {
+	font-size: 1.3rem;
+}

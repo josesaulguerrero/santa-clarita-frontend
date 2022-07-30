@@ -1,12 +1,11 @@
 a[id^='navlink-'] {
 	text-decoration: none;
-	min-width: 150px;
+	min-width: 160px;
 	max-width: fit-content;
-	height: 30px;
+	height: 40px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 5px;
 	font-size: 2rem;
 	background-color: rgb(160, 136, 197);
 	border-radius: 5px;
