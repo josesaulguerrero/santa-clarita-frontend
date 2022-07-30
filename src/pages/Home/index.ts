@@ -1,6 +1,7 @@
 import { Nav } from './../../components/Nav/index';
 import { Component } from '../../types/common/Component';
 import hospitalLogo from '../../assets/favicon.png';
+import './index.css';
 
 const navlinksConfig = {
 	items: [
@@ -29,6 +30,7 @@ export const Home: Component<void> = () => {
 	$home.innerHTML = `
 		<section class="logo">
 			<img src="${hospitalLogo}" width="200" alt="hospital logo" class="logo-img">
+			<h1 class="home-title">Santa Clarita hospital</h1>
 		</section>
 		<section class="nav" id="nav"></section>
 	`;
