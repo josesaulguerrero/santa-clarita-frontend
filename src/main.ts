@@ -1,8 +1,19 @@
 import { Router } from './routes/router';
-import { Header } from './components/Header';
 import './main.css';
+import { Home } from './pages/Home';
+import { Routes } from './types/common/Router';
 
-const rootNode = document.querySelector('#root')!;
-rootNode.appendChild(Header());
+const routes: Routes = [
+	{
+		route: 'home',
+		component: Home,
+	},
+];
 
-Router();
+const setUpApp = () => {
+	const router = Router.getInstance();
+	router.setUpInitialRoute('home');
+	router.setUpRoutes(routes);
+};
+
+setUpApp();

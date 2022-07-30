@@ -1,4 +1,3 @@
-import { IRoute } from './../types/common/Router';
 import { Routes } from '../types/common/Router';
 import { BehaviorSubject } from 'rxjs';
 import { Component } from '../types/common/Component';
@@ -7,19 +6,23 @@ export class Router {
 	private static instance: Router;
 	private routes: Routes;
 	private currentRoute: string;
+	private initialRoute: string;
 	private $rootNode: HTMLElement;
 	private route$: BehaviorSubject<string>;
 
 	private constructor() {
+		const initialRoute = '/';
 		this.routes = [];
-		this.route$ = new BehaviorSubject<string>(location.hash);
-		this.currentRoute = location.hash;
+		this.route$ = new BehaviorSubject<string>(initialRoute);
+		this.currentRoute = initialRoute;
+		this.initialRoute = initialRoute;
 		this.$rootNode = document.querySelector('#root')!;
-		this.updateUI();
 	}
 
 	private getComponent(route: string): Component<void> {
-		const componentIndex = this.routes.findIndex((r) => r.route === route);
+		const componentIndex = this.routes.findIndex((r) => {
+			return r.route === route;
+		});
 		return componentIndex < 0
 			? () => document.createElement('section')
 			: this.routes[componentIndex].component;
@@ -27,16 +30,25 @@ export class Router {
 
 	private updateUI() {
 		this.route$.subscribe((route) => {
-			location.hash = route;
-			this.currentRoute = route;
-			const renderComponent = this.getComponent(route);
-			this.$rootNode.innerHTML = '';
-			this.$rootNode.appendChild(renderComponent());
+			if (this.initialRoute === '/' || route !== '/') {
+				location.hash = route;
+				this.currentRoute = route;
+				const renderComponent = this.getComponent(route);
+				this.$rootNode.innerHTML = '';
+				this.$rootNode.appendChild(renderComponent());
+			} else {
+				this.route$.next(this.initialRoute);
+			}
 		});
 	}
 
-	public addRoute(route: IRoute) {
-		this.routes.push(route);
+	public setUpInitialRoute(redirectTo: string) {
+		this.initialRoute = redirectTo;
+	}
+
+	public setUpRoutes(routes: Routes) {
+		this.routes = routes;
+		this.updateUI();
 	}
 
 	public getRoute() {
