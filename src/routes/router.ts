@@ -32,25 +32,30 @@ export class Router {
 
 	private setUpListeners() {
 		window.addEventListener('load', () => {
-			if (location.hash === '') {
-				location.hash = `/${this.initialRoute}`;
+			if (location.pathname === '/') {
+				this.updateRoute(this.initialRoute);
 			}
-			this.route$.next(this.normalizeRoute(location.hash));
+			this.route$.next(this.normalizeRoute(location.pathname));
 		});
-		window.addEventListener('hashchange', () =>
-			this.route$.next(this.normalizeRoute(location.hash))
+		window.addEventListener(
+			'popstate',
+			() => {
+				console.log('hid');
+				this.route$.next(this.normalizeRoute(location.pathname));
+			},
+			true
 		);
 		this.route$.subscribe((route) => {
 			this.currentRoute = route;
-			this.updateUI(route);
+			this.updateUI();
 		});
 	}
 
 	private normalizeRoute(route: string): string {
-		return route.replaceAll(/#\//gm, '');
+		return route.replaceAll(/^\//gm, '');
 	}
 
-	private updateUI(route: string) {
+	private updateUI() {
 		const renderComponent = this.getComponent(this.currentRoute);
 		this.$rootNode.innerHTML = '';
 		this.$rootNode.appendChild(renderComponent());
@@ -72,9 +77,14 @@ export class Router {
 		return this.route$.asObservable();
 	}
 
-	public updateRoute(newRoute: string): void {
+	public updateRoute(newRoute: string, stateParams: any = {}): void {
 		if (newRoute !== this.currentRoute) {
-			this.route$.next(newRoute);
+			history.pushState(
+				{ ...stateParams, urlRequested: newRoute },
+				'santa clarita',
+				newRoute
+			);
+			this.route$.next(this.normalizeRoute(newRoute));
 		}
 	}
 
