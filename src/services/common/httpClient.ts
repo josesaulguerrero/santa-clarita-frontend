@@ -19,7 +19,10 @@ export class CustomHttpClient implements IHttpClient {
 		const url = `${this.baseURL}/${endpoint}`;
 		const requestConfig: Request = new Request(url, {
 			method: HttpMethod[method],
-			body: body,
+			body: JSON.stringify(body),
+			headers: {
+				'Content-Type': 'application/json',
+			},
 		});
 		const response = fetch(requestConfig).then((r) => r.json());
 		return from(response);
@@ -33,23 +36,23 @@ export class CustomHttpClient implements IHttpClient {
 		endpoint: string,
 		body?: any
 	): Observable<ResponseType> =>
-		this.execute<ResponseType>(endpoint, HttpMethod.GET, body);
+		this.execute<ResponseType>(endpoint, HttpMethod.POST, body);
 
 	put = <ResponseType>(
 		endpoint: string,
 		body?: any
 	): Observable<ResponseType> =>
-		this.execute<ResponseType>(endpoint, HttpMethod.GET, body);
+		this.execute<ResponseType>(endpoint, HttpMethod.PUT, body);
 
 	patch = <ResponseType>(
 		endpoint: string,
 		body?: any
 	): Observable<ResponseType> =>
-		this.execute<ResponseType>(endpoint, HttpMethod.GET, body);
+		this.execute<ResponseType>(endpoint, HttpMethod.PATCH, body);
 
 	delete = <ResponseType>(
 		endpoint: string,
 		body?: any
 	): Observable<ResponseType> =>
-		this.execute<ResponseType>(endpoint, HttpMethod.GET, body);
+		this.execute<ResponseType>(endpoint, HttpMethod.DELETE, body);
 }
