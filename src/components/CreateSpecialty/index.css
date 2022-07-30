@@ -66,6 +66,10 @@
 	color: rgb(32, 159, 38);
 }
 
+.loader.hidden {
+	display: none;
+}
+
 .form-submit {
 	width: 100%;
 	max-width: 200px;

@@ -8,6 +8,14 @@ const stringIsEmpty = (value: string) => {
 	return value.trim() === '';
 };
 
+const removeOption = ($input: HTMLInputElement): void => {
+	const optionsLeft = Array.from($input.querySelectorAll('option')!).filter(
+		(option) => option.id !== $input.value
+	);
+	$input.innerHTML = '';
+	$input.append(...optionsLeft);
+};
+
 const onSubmit = (event: SubmitEvent) => {
 	event.preventDefault();
 	const $form = event.target as HTMLFormElement;
@@ -16,6 +24,7 @@ const onSubmit = (event: SubmitEvent) => {
 		'#specialist'
 	) as HTMLInputElement;
 	const $formMessage = $form.querySelector('#form-message')!;
+	removeOption($specialistInput);
 	$formMessage.innerHTML = '';
 	if (!stringIsEmpty($nameInput.value)) {
 		try {
@@ -55,20 +64,30 @@ export const CreateSpecialty: Component<void> = () => {
 	const $specialistInput = $createPatientForm.querySelector(
 		'#specialist'
 	) as HTMLInputElement;
+	const $form = $createPatientForm.querySelector('#create-patient-form')!;
 	const $loader = $createPatientForm.querySelector('#loader');
-	SpecialistService.getInstance()
-		.getAllAvailable()
-		.subscribe((availableSpecialists) => {
-			availableSpecialists.forEach(({ fullName, id }) => {
-				$specialistInput.insertAdjacentHTML(
-					'beforeend',
-					`<option value="${id}">${fullName}</option>`
-				);
-				$specialistInput.disabled = false;
-				$loader?.classList.add('hidden');
+	const $formMessage = $form.querySelector('#form-message')!;
+	$formMessage.innerHTML = '';
+	try {
+		SpecialistService.getInstance()
+			.getAllAvailable()
+			.subscribe((availableSpecialists) => {
+				availableSpecialists.forEach(({ fullName, id }) => {
+					$specialistInput.insertAdjacentHTML(
+						'beforeend',
+						`<option value="${id}" id="${id}">${fullName}</option>`
+					);
+					$specialistInput.disabled = false;
+					$loader?.classList.add('hidden');
+					$formMessage.innerHTML =
+						'Your request has been processed successfully.';
+					$formMessage.classList.add('success');
+				});
 			});
-		});
-	const $form = $createPatientForm.querySelector('#create-patient-form');
+	} catch (e) {
+		$formMessage.innerHTML = 'Something went wrong... Please try again later.';
+		$formMessage.classList.add('error');
+	}
 	($form as HTMLFormElement).onsubmit = onSubmit;
 	return $createPatientForm;
 };

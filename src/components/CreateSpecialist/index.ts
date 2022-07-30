@@ -53,7 +53,7 @@ export const CreateSpecialist: Component<void> = () => {
 				<span class="label-message">Enter their age: </span>
 				<input type="number" max="80" min="18" id="age" name="age" required class="label-input">
 			</label>
-			<span class="form-message success" id="form-message" ></span>
+			<span class="form-message" id="form-message" ></span>
 			<button class="form-submit" type="submit">Submit</button>
 		</form>
    `;
