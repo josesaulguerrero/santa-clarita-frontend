@@ -20,7 +20,7 @@ export const Specialties: Component<void> = () => {
 	SpecialtyService.getInstance()
 		.getAll()
 		.subscribe((specialties) => {
-			if (specialties.length >= 0) {
+			if (specialties.length <= 0) {
 				$specialties.querySelector('#message')!.innerHTML =
 					'There are no specialties yet!';
 			}

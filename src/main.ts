@@ -8,6 +8,7 @@ import { Specialists } from './pages/Specialists';
 import { Patients } from './pages/Patients';
 import { CreatePatient } from './components/CreatePatient';
 import { Specialties } from './pages/Specialties';
+import { CreateSpecialty } from './components/CreateSpecialty';
 
 const routes: Routes = [
 	{
@@ -34,10 +35,10 @@ const routes: Routes = [
 		route: 'specialties',
 		component: () => Layout({ child: Specialties }),
 	},
-	// {
-	// 	route: 'specialties/create',
-	// 	component: () => Layout({ child: CreatePatient }),
-	// },
+	{
+		route: 'specialties/create',
+		component: () => Layout({ child: CreateSpecialty }),
+	},
 ];
 
 const setUpApp = () => {

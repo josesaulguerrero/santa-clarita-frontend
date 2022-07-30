@@ -17,7 +17,7 @@ const onSubmit = (event: SubmitEvent) => {
 	if (
 		!stringIsEmpty($dniInput.value) ||
 		!stringIsEmpty($ageInput.value) ||
-		!stringIsEmpty($dniInput.value)
+		!stringIsEmpty($nameInput.value)
 	) {
 		try {
 			SpecialistService.getInstance().post({

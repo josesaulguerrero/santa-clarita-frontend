@@ -19,7 +19,7 @@ export const Specialists: Component<void> = () => {
 	SpecialistService.getInstance()
 		.getAll()
 		.subscribe((specialists) => {
-			if (specialists.length >= 0) {
+			if (specialists.length <= 0) {
 				$specialists.querySelector('#message')!.innerHTML =
 					'There are no specialists yet!';
 			}

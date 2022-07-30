@@ -21,7 +21,7 @@ export const Patients: Component<void> = () => {
 	PatientService.getInstance()
 		.getAll()
 		.subscribe((patients) => {
-			if (patients.length >= 0) {
+			if (patients.length <= 0) {
 				$patients.querySelector('#message')!.innerHTML =
 					'There are no patients yet!';
 			}

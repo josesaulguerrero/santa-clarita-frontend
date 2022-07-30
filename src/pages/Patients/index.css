@@ -28,6 +28,10 @@
 	grid-template-columns: 2fr 1fr 1fr;
 }
 
+.message:empty {
+	display: none;
+}
+
 .message {
 	margin-top: 50px;
 	font-size: 2rem;
