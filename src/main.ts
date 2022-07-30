@@ -1,12 +1,13 @@
 import { Router } from './routes/router';
 import './main.css';
-import { Home } from './pages/Home';
+import { Home } from './pages/Home/Home';
 import { Routes } from './types/common/Router';
+import { Layout } from './pages/Layout/Layout';
 
 const routes: Routes = [
 	{
 		route: 'home',
-		component: Home,
+		component: () => Layout({ child: Home }),
 	},
 ];
 
