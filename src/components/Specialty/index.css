@@ -1,0 +1,20 @@
+.specialty {
+	width: 100%;
+	height: auto;
+	display: grid;
+	grid-template-rows: auto;
+	grid-template-columns: 3fr 1fr;
+	list-style: none;
+}
+
+.specialty-name {
+	font-size: 1.5rem;
+	padding: 10px;
+	border: 1px solid black;
+}
+
+.specialty-id {
+	font-size: 1.3rem;
+	border: 1px solid black;
+	padding: 10px;
+}

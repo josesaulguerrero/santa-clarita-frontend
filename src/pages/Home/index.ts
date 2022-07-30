@@ -18,7 +18,7 @@ const navlinksConfig = {
 			href: 'patients',
 		},
 		{
-			content: 'appointments',
+			content: 'Appointments',
 			href: 'appointments',
 		},
 	],
