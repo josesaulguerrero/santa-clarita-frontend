@@ -1,4 +1,4 @@
-import { Nav } from './../../components/Nav/index';
+import { Nav } from '../../components/Nav/index';
 import { Component } from '../../types/common/Component';
 import hospitalLogo from '../../assets/favicon.png';
 import './index.css';
