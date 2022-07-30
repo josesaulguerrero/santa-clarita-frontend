@@ -1,0 +1,43 @@
+.patients {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+}
+
+.patients-title {
+	width: 100%;
+	font-size: 3rem;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.patients-list {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow-y: auto;
+}
+
+.patients-list-header {
+	width: 100%;
+	display: grid;
+	grid-template-rows: auto;
+	grid-template-columns: 2fr 1fr 1fr;
+}
+
+.patients-list-header span {
+	font-size: 1.5rem;
+	font-weight: bold;
+	padding: 10px;
+	background-color: rgb(140, 140, 225);
+}
+
+.patients-list ~ a[class^='navlink-'] {
+	margin-top: 20px;
+	align-self: center;
+	width: 250px;
+	margin-bottom: 30px;
+}

@@ -5,6 +5,7 @@ import { Home } from './pages/Home';
 import { Routes } from './types/common/Router';
 import { Layout } from './pages/Layout';
 import { Specialists } from './pages/Specialists';
+import { Patients } from './pages/Patients';
 
 const routes: Routes = [
 	{
@@ -18,6 +19,10 @@ const routes: Routes = [
 	{
 		route: 'specialists/create',
 		component: () => Layout({ child: CreateSpecialist }),
+	},
+	{
+		route: 'patients',
+		component: () => Layout({ child: Patients }),
 	},
 ];
 
