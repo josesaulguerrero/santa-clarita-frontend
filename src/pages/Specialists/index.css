@@ -19,6 +19,7 @@
 }
 
 .specialists-list ~ a[class^='navlink-'] {
+	margin-top: 20px;
 	align-self: center;
 	width: 250px;
 	margin-bottom: 30px;
