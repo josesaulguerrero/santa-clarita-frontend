@@ -28,6 +28,11 @@
 	grid-template-columns: 3fr 1fr;
 }
 
+.message {
+	margin-top: 50px;
+	font-size: 2rem;
+}
+
 .specialists-list-header span {
 	font-size: 1.5rem;
 	font-weight: bold;

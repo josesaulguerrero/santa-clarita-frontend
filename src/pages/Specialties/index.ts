@@ -14,11 +14,16 @@ export const Specialties: Component<void> = () => {
 				<span>Name</span>
 				<span>Id</span>
 			</header>
+			<h3 class="message" id="message"></h3>
 		</ul>
 	`;
 	SpecialtyService.getInstance()
 		.getAll()
 		.subscribe((specialties) => {
+			if (specialties.length >= 0) {
+				$specialties.querySelector('#message')!.innerHTML =
+					'There are no specialties yet!';
+			}
 			specialties.forEach((specialty) => {
 				$specialties
 					.querySelector('#specialties-list')

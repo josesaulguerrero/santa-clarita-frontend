@@ -15,11 +15,16 @@ export const Patients: Component<void> = () => {
 				<span>Age</span>
 				<span>Id</span>
 			</header>
+			<h3 class="message" id="message"></h3>
 		</ul>
 	`;
 	PatientService.getInstance()
 		.getAll()
 		.subscribe((patients) => {
+			if (patients.length >= 0) {
+				$patients.querySelector('#message')!.innerHTML =
+					'There are no patients yet!';
+			}
 			patients.forEach((patient) => {
 				$patients.querySelector('#patients-list')?.append(Patient(patient));
 			});

@@ -28,6 +28,11 @@
 	grid-template-columns: 2fr 1fr 1fr;
 }
 
+.message {
+	margin-top: 50px;
+	font-size: 2rem;
+}
+
 .patients-list-header span {
 	font-size: 1.5rem;
 	font-weight: bold;
