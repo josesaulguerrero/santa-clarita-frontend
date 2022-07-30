@@ -2,12 +2,17 @@ import { Component } from '../../types/common/Component';
 import { Navlink } from '../Navlink';
 import './index.css';
 
+type navlinkConfig = {
+	content: string;
+	href: string;
+};
+
 interface INavProps {
-	items: string[];
+	items: navlinkConfig[];
 }
 
-const mapItems = (items: string[]): HTMLElement[] =>
-	items.map((item) => Navlink({ content: item, href: item }));
+const mapItems = (items: navlinkConfig[]): HTMLElement[] =>
+	items.map((item) => Navlink({ content: item.content, href: item.href }));
 
 export const Nav: Component<INavProps> = ({ items }): HTMLElement => {
 	const $nav = document.createElement('nav');

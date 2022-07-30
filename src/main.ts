@@ -1,8 +1,8 @@
 import { Router } from './routes/router';
 import './main.css';
-import { Home } from './pages/Home/Home';
+import { Home } from './pages/Home';
 import { Routes } from './types/common/Router';
-import { Layout } from './pages/Layout/Layout';
+import { Layout } from './pages/Layout';
 
 const routes: Routes = [
 	{

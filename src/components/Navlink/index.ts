@@ -1,5 +1,6 @@
 import { Router } from '../../routes/router';
 import { Component } from '../../types/common/Component';
+import './index.css';
 
 interface INavlinkProps {
 	content: string;
@@ -20,6 +21,7 @@ export const Navlink: Component<INavlinkProps> = ({
 	$navlink.href = href.toLowerCase();
 	$navlink.dataset.href = href.toLowerCase();
 	$navlink.id = `navlink-${href}`;
+	$navlink.classList.add(`navlink-${href}`);
 	$navlink.onclick = onClick;
 	$navlink.innerHTML = content;
 	return $navlink;
