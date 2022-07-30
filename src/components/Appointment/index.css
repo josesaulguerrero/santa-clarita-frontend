@@ -1,0 +1,22 @@
+.appointment {
+	width: 100%;
+	height: auto;
+	display: grid;
+	grid-template-rows: auto;
+	grid-template-columns: 3fr 1fr;
+	list-style: none;
+}
+
+.appointment-date,
+.appointment-id {
+	border: 1px solid black;
+	padding: 10px;
+}
+
+.appointment-date {
+	font-size: 1.5rem;
+}
+
+.appointment-id {
+	font-size: 1.3rem;
+}

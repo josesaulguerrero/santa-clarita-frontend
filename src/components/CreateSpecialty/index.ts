@@ -65,28 +65,18 @@ export const CreateSpecialty: Component<void> = () => {
 	) as HTMLInputElement;
 	const $form = $createSpecialtyForm.querySelector('#create-specialty-form')!;
 	const $loader = $createSpecialtyForm.querySelector('#loader');
-	const $formMessage = $form.querySelector('#form-message')!;
-	$formMessage.innerHTML = '';
-	try {
-		SpecialistService.getInstance()
-			.getAllAvailable()
-			.subscribe((availableSpecialists) => {
-				availableSpecialists.forEach(({ fullName, id }) => {
-					$specialistInput.insertAdjacentHTML(
-						'beforeend',
-						`<option value="${id}" id="${id}">${fullName}</option>`
-					);
-					$specialistInput.disabled = false;
-					$loader?.classList.add('hidden');
-					$formMessage.innerHTML =
-						'Your request has been processed successfully.';
-					$formMessage.classList.add('success');
-				});
+	SpecialistService.getInstance()
+		.getAllAvailable()
+		.subscribe((availableSpecialists) => {
+			availableSpecialists.forEach(({ fullName, id }) => {
+				$specialistInput.insertAdjacentHTML(
+					'beforeend',
+					`<option value="${id}" id="${id}">${fullName}</option>`
+				);
+				$specialistInput.disabled = false;
+				$loader?.classList.add('hidden');
 			});
-	} catch (e) {
-		$formMessage.innerHTML = 'Something went wrong... Please try again later.';
-		$formMessage.classList.add('error');
-	}
+		});
 	($form as HTMLFormElement).onsubmit = onSubmit;
 	return $createSpecialtyForm;
 };

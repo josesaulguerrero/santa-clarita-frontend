@@ -1,3 +1,4 @@
+import { Appointments } from './pages/Appointments/index';
 import { CreateSpecialist } from './components/CreateSpecialist/index';
 import { Router } from './routes/router';
 import './main.css';
@@ -39,6 +40,10 @@ const routes: Routes = [
 	{
 		route: 'specialties/create',
 		component: () => Layout({ child: CreateSpecialty }),
+	},
+	{
+		route: 'appointments',
+		component: () => Layout({ child: Appointments }),
 	},
 	{
 		route: 'appointments/create',
