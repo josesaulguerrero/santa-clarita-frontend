@@ -15,7 +15,24 @@
 
 .specialists-list {
 	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	overflow-y: auto;
+}
+
+.specialists-list-header {
+	width: 100%;
+	display: grid;
+	grid-template-rows: auto;
+	grid-template-columns: 3fr 1fr;
+}
+
+.specialists-list-header span {
+	font-size: 1.5rem;
+	font-weight: bold;
+	padding: 10px;
+	background-color: rgb(140, 140, 225);
 }
 
 .specialists-list ~ a[class^='navlink-'] {

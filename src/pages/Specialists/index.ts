@@ -9,7 +9,12 @@ export const Specialists: Component<void> = () => {
 	$specialists.classList.add('specialists');
 	$specialists.innerHTML = `
       <h1 class="specialists-title" >Specialists</h1>
-      <ul class="specialists-list" id="specialists-list" ></ul>
+      <ul class="specialists-list" id="specialists-list" >
+			<header class="specialists-list-header">
+				<span>Name</span>
+				<span>Id</span>
+			</header>
+		</ul>
 	`;
 	SpecialistService.getInstance()
 		.getAll()
